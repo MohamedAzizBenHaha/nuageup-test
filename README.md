@@ -188,12 +188,3 @@ wget -qO- http://<nuageup-service-external-ip-from-service-step>
 ## Troubleshooting
 Refer to the Jenkins logs for any errors during the build or deployment process.
 Use kubectl commands to check the status of pods, deployments, and services within your Kubernetes cluster.
-
-
-
-
-
-edit the metric server to work 
-
-kubectl -n kube-system edit deployment metric-server
-kubectl replace --force -f metrics-server.yaml
