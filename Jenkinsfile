@@ -18,12 +18,6 @@ pipeline {
             }
         }
 
-        stage('setup nginx') {
-            steps {
-                sh 'sudo kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.4.0/deploy/static/provider/cloud/deploy.yaml'
-            }
-        }
-  
         stage('Build Docker Image') {
             steps {
                 sh 'sudo chmod 777 /var/run/docker.sock'

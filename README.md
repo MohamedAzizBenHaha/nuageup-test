@@ -60,18 +60,6 @@ kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.14.5/confi
 
 Refer to this link for documentation full: https://metallb.universe.tf/installation/
 
-## Install Nginx
-```shell
-helm pull oci://ghcr.io/nginxinc/charts/nginx-ingress --untar --version 0.17.1
-```
-```shell
-kubectl apply -fnginx-ingress/crds
-```
-```shell
-helm install nginx-ingress oci://ghcr.io/nginxinc/charts/nginx-ingress --version 0.17.1
-```
-Refer to this link for documentation full: https://docs.nginx.com/nginx-ingress-controller/installation/installing-nic/installation-with-manifests/
-
 ## Deploy using CI/CD pipeline
 ### Install Jenkins
 ```shell
