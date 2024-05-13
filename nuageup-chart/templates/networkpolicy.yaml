@@ -11,6 +11,8 @@ spec:
   - Egress
   ingress:
   - from:
+    - ipBlock:
+        cidr: "172.16.49.64/32"
     - podSelector:
         matchLabels:
           role: friend
