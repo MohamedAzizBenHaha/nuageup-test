@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nuageup-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nuageup
+  template:
+    metadata:
+      labels:
+        app: nuageup
+        role: friend
+    spec:
+      containers:
+      - name: nuageup
+        image: mohamedazizbenhaha/nuageup:latest
+        ports:
+        - containerPort: 3000
+        resources:
+          requests:
+            memory: "100Mi"
+            cpu: "500m"
+          limits:
+            memory: "200Mi"
+            cpu: "1000m"
+        livenessProbe:
+          httpGet:
+            path: /liveness
+            port: 3000
+          initialDelaySeconds: 15
+          periodSeconds: 20
+        readinessProbe:
+          httpGet:
+            path: /readiness
+            port: 3000
+          initialDelaySeconds: 5
+          periodSeconds: 10

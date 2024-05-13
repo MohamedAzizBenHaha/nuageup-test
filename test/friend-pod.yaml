@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: friend-pod
+  labels:
+    role: friend
+spec:
+  containers:
+  - name: friend-container
+    image: alpine
+    command: ["sleep", "3600"]
