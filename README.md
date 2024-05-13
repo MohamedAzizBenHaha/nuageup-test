@@ -77,11 +77,11 @@ sudo apt-get install jenkins
 Refer to this link for documentation full: https://www.jenkins.io/doc/book/installing/linux/
 
 ### Unlock Jenkins
-When you first access a new Jenkins instance, you are asked to unlock it using an automatically-generated password.
+- When you first access a new Jenkins instance, you are asked to unlock it using an automatically-generated password.
 
-Browse to http://http://10.0.0.10:8080 and wait until the Unlock Jenkins page appears.
+- Browse to http://http://10.0.0.10:8080 and wait until the Unlock Jenkins page appears.
 
-The following command will print the password at console.On the Unlock Jenkins page, paste this password into the Administrator password field and click Continue.
+- The following command will print the password at console.On the Unlock Jenkins page, paste this password into the Administrator password field and click Continue.
 
 ```shell
 sudo cat /var/lib/jenkins/secrets/initialAdminPassword
@@ -92,34 +92,34 @@ For now we will chosse install suggested plugins - to install the recommended se
 
 ### Configure dockerhub-credentials in Jenkins
 
-In your Jenkins instance, navigate to "Manage Jenkins" -> "Manage Credentials"
+1. In your Jenkins instance, navigate to "Manage Jenkins" -> "Manage Credentials"
 
-Click on "System Credentials" -> "Global credentials (unrestricted)"
+2. Click on "System Credentials" -> "Global credentials (unrestricted)"
 
-Select "Username with password" as the credential type
+3. Select "Username with password" as the credential type
 
-In the "ID" field enter **dockerhub-credentials**
+4. In the "ID" field enter **dockerhub-credentials**
 
-In the "Username" field enter **mohamedazizbenhaha** and check the "Treat username as secret" box
+5. In the "Username" field enter **mohamedazizbenhaha** and check the "Treat username as secret" box
 
-In the "Password" field enter **dckr_pat_hsvgCVi4B4P8fY5kjoCvsVJfjl8**
+6. In the "Password" field enter **dckr_pat_hsvgCVi4B4P8fY5kjoCvsVJfjl8**
 
 ### Create the pipeline
-Click on "New Item" in the Jenkins dashboard.
+1. Click on "New Item" in the Jenkins dashboard.
 
-In the "name" field enter **k8s-nuageup**
+2. In the "name" field enter **k8s-nuageup**
 
-Select "Pipeline" as the job type and click "OK".
+3. Select "Pipeline" as the job type and click "OK".
 
-In the "General" section, choose "GitHub project" and enter the project url : **https://github.com/MohamedAzizBenHaha/nuageup.git**
+4. In the "General" section, choose "GitHub project" and enter the project url : **https://github.com/MohamedAzizBenHaha/nuageup-test.git**
 
-In the "Pipeline" section
+5. In the "Pipeline" section
   - choose **Pipeline script from SCM** from the "Definition" drop list
   - choose **Git** from the "SCM" drop list
-  - In the "Repository URL" field enter **https://github.com/MohamedAzizBenHaha/nuageup.git**
+  - In the "Repository URL" field enter **https://github.com/MohamedAzizBenHaha/nuageup-test.git**
   - In the "Branch Specifier" field enter ***/main**
 
-Run the pipeline. 
+6. Run the pipeline. 
 
 Once run,this pipeline will automatically build the Docker image, push it to Docker Hub, and deploy the application to the Kubernetes cluster. Once the deployment is complete, proceed to the testing procedure.
 
@@ -163,7 +163,7 @@ kubectl -n kube-system edit deployment metric-server
         - --kubelet-insecure-tls
 ```
 ### Network Policy
-1. Create a friend Pod by running the **friend-pod.yaml (https://github.com/MohamedAzizBenHaha/nuageup/blob/main/friend-pod.yaml)** using the following command
+1. Create a friend Pod by running the **friend-pod.yaml (https://github.com/MohamedAzizBenHaha/nuageup-test/blob/main/test/friend-pod.yaml)** using the following command
 ```shell
 kubectl apply -f friend-pod.yaml 
 ```
@@ -181,7 +181,7 @@ wget -qO- http://<nuageup-service-cluster-ip-from-service-step>
 ```shell
 wget -qO- http://<nuageup-service-external-ip-from-service-step>
 ```
-4. Repeat the same process, but this time with an **any-pod.yaml (https://github.com/MohamedAzizBenHaha/nuageup/blob/main/any-pod.yaml)**
+4. Repeat the same process, but this time with an **any-pod.yaml (https://github.com/MohamedAzizBenHaha/nuageup-test/blob/main/test/any-pod.yaml)**
 
 ⚠️**This time, the connection should fail, or timeout, as the network policy is blocking access. Only pods with the designated label "role: friend" are allowed to communicate with the nuageup application pods.**
 
