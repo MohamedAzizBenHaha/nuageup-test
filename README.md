@@ -144,6 +144,24 @@ write down the service **CLUSTER-IP** and **EXTERNAL-IP** as we will need it lat
 ```shell
 kubectl get hpa nuageup-hpa
 ```
+⚠️**If for any reason the HPA is not showing the resource utilisation in the "TARGETS" section, you can solve the problem as follow**
+
+- Open the metric-server deployment in the editor by using the following command
+```shell
+kubectl -n kube-system edit deployment metric-server
+```
+- Add **"- --kubelet-insecure-tls"** to the container args list in the spec section as follow
+```shell
+    spec:
+      containers:
+      - args:
+        - --cert-dir=/tmp
+        - --secure-port=443
+        - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname
+        - --kubelet-use-node-status-port
+        - --metric-resolution=15s
+        - --kubelet-insecure-tls
+```
 ### Network Policy
 1. Create a friend Pod by running the **friend-pod.yaml (https://github.com/MohamedAzizBenHaha/nuageup/blob/main/friend-pod.yaml)** using the following command
 ```shell
