@@ -44,7 +44,7 @@ pipeline {
 
         stage('install nuageup helm chart') {
             steps {
-                sh('helm install nuageup-chart/')
+                sh('helm install nuageup nuageup-chart/')
                 sleep(60) 
             }
         }
