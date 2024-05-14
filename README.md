@@ -105,7 +105,7 @@ For now we will chosse install suggested plugins - to install the recommended se
 
 6. In the "Password" field enter **dckr_pat_hsvgCVi4B4P8fY5kjoCvsVJfjl8**
 
-⚠️**Disclaimer: These credentials are for testing purpuses and will no longer beb available in 60 days.**
+⚠️**Disclaimer: These credentials are for testing purpuses and will no longer beb available in 30 days.**
 
    **Expiration date : 15/06/2024.**
 
@@ -178,9 +178,6 @@ kubectl exec -it friend-pod -- /bin/sh
 ```
 3. From within the pod's shell, try to connect to the nuageup application
 ```shell
-wget -qO- http://<nuageup-pod-ip-from-deployment-step>:3000
-```
-```shell
 wget -qO- http://<nuageup-service-cluster-ip-from-service-step>
 ```
 ```shell
@@ -192,4 +189,5 @@ wget -qO- http://<nuageup-service-external-ip-from-service-step>
 
 ## Troubleshooting
 Refer to the Jenkins logs for any errors during the build or deployment process.
+
 Use kubectl commands to check the status of pods, deployments, and services within your Kubernetes cluster.
