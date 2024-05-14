@@ -105,6 +105,10 @@ For now we will chosse install suggested plugins - to install the recommended se
 
 6. In the "Password" field enter **dckr_pat_hsvgCVi4B4P8fY5kjoCvsVJfjl8**
 
+⚠️**Disclaimer: These credentials are for testing purpuses and will no longer beb available in 60 days.
+     expiration date : 15/06/2024.
+**
+
 ### Create the pipeline
 1. Click on "New Item" in the Jenkins dashboard.
 
