@@ -3,11 +3,12 @@ This repository contains the necessary files and instructions to deploy a scalab
 
 ## Application Components
 1. **Dockerfile**: Defines the steps to build the Node.js application image.
-2. **Deployment YAML**: Describes the Kubernetes deployment configuration, including resource requests/limits, liveness/readiness probes, and replica count.
-3. **Service YAML**: Creates a Kubernetes Service of type LoadBalancer to expose the application externally.
-4. **Ingress YAML**: Configures an Ingress controller and defines an Ingress resource for external access through a specific hostname.
-5. **HPA YAML**: Sets up Horizontal Pod Autoscaler to scale the number of pods based on CPU or memory usage.
-6. **NetworkPolicy YAML**: Implements a NetworkPolicy to restrict traffic to the application pods, enhancing security.
+2. **nuageup-chart** : Defines the steps to deploy the Node.js application in the cluster. It contains the following file:
+   - **Deployment YAML**: Describes the Kubernetes deployment configuration, including resource requests/limits, liveness/readiness probes, and replica count.
+   - **Service YAML**: Creates a Kubernetes Service of type LoadBalancer to expose the application externally.
+   - **Ingress YAML**: Configures an Ingress controller and defines an Ingress resource for external access through a specific hostname.
+   - **HPA YAML**: Sets up Horizontal Pod Autoscaler to scale the number of pods based on CPU or memory usage.
+   - **NetworkPolicy YAML**: Implements a NetworkPolicy to restrict traffic to the application pods, enhancing security.
 
 ## Additional Notes:
 The application utilizes self-healing mechanisms of Kubernetes. If a pod is manually deleted, Kubernetes will automatically create a new one to maintain the desired replica count.
