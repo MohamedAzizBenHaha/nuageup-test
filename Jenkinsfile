@@ -52,7 +52,7 @@ pipeline {
         stage('update hosts') {
             steps {
                 sh 'sudo chmod +x service_update_hosts.sh'
-                sh 'sudo sh service_update_hosts.sh'
+                sh 'sudo sh update_hosts.sh'
             }
         }
 
