@@ -149,24 +149,8 @@ write down the service **CLUSTER-IP** and **EXTERNAL-IP** as we will need it lat
 ```shell
 kubectl get hpa nuageup-hpa
 ```
-⚠️**If for any reason the HPA is not showing the resource utilisation in the "TARGETS" section, you can solve the problem as follow**
+To verify if the HPA is working, apply load to the application. This can be done through **Load Testing** tools like K6 or JMeter to simulate user traffic and increase load on the application.
 
-- Open the metric-server deployment in the editor by using the following command
-```shell
-kubectl -n kube-system edit deployment metric-server
-```
-- Add **"- --kubelet-insecure-tls"** to the container args list in the spec section as follow
-```shell
-    spec:
-      containers:
-      - args:
-        - --cert-dir=/tmp
-        - --secure-port=443
-        - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname
-        - --kubelet-use-node-status-port
-        - --metric-resolution=15s
-        - --kubelet-insecure-tls
-```
 ### Network Policy
 1. Create a friend Pod by running the **friend-pod.yaml (https://github.com/MohamedAzizBenHaha/nuageup-test/blob/main/test/friend-pod.yaml)** using the following command
 ```shell
@@ -191,3 +175,22 @@ wget -qO- http://<nuageup-service-external-ip-from-service-step>
 Refer to the Jenkins logs for any errors during the build or deployment process.
 
 Use kubectl commands to check the status of pods, deployments, and services within your Kubernetes cluster.
+
+If for any reason the HPA is not showing the resource utilisation in the "TARGETS" section, you can solve the problem as follow
+
+- Open the metric-server deployment in the editor by using the following command
+```shell
+kubectl -n kube-system edit deployment metric-server
+```
+- Add **"- --kubelet-insecure-tls"** to the container args list in the spec section as follow
+```shell
+    spec:
+      containers:
+      - args:
+        - --cert-dir=/tmp
+        - --secure-port=443
+        - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname
+        - --kubelet-use-node-status-port
+        - --metric-resolution=15s
+        - --kubelet-insecure-tls
+```
