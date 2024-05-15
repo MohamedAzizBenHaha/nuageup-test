@@ -105,9 +105,7 @@ For now we will chosse install suggested plugins - to install the recommended se
 
 6. In the "Password" field enter **dckr_pat_hsvgCVi4B4P8fY5kjoCvsVJfjl8**
 
-⚠️**Disclaimer: These credentials are for testing purpuses and will no longer beb available in 30 days.**
-
-   **Expiration date : 15/06/2024.**
+⚠️**Disclaimer: These credentials are for testing purpuses and will no longer beb available in 30 days. Expiration date : 15/06/2024.**
 
 ### Create the pipeline
 1. Click on "New Item" in the Jenkins dashboard.
@@ -169,7 +167,7 @@ wget -qO- http://<nuageup-service-external-ip-from-service-step>
 ```
 4. Repeat the same process, but this time with an **any-pod.yaml (https://github.com/MohamedAzizBenHaha/nuageup-test/blob/main/test/any-pod.yaml)**
 
-⚠️**This time, the connection should fail, or timeout, as the network policy is blocking access. Only pods with the designated label "role: friend" are allowed to communicate with the nuageup application pods.**
+**This time, the connection should fail, or timeout, as the network policy is blocking access. Only pods with the designated label "role: friend" are allowed to communicate with the nuageup application pods.**
 
 ## Troubleshooting
 Refer to the Jenkins logs for any errors during the build or deployment process.
@@ -194,3 +192,24 @@ kubectl -n kube-system edit deployment metric-server
         - --metric-resolution=15s
         - --kubelet-insecure-tls
 ```
+## Ingress for External Access (Not Tested Yet)
+The provided files at https://github.com/MohamedAzizBenHaha/nuageup-test/tree/main/What's%20next contain configurations for an ingress controller and a service modified to work with the ingress.
+
+### Copy the Files
+Copy the ingress.yaml file and the service-ingress.yaml file from the provided URL to the nuageup-chart folder.
+
+ - Place ingress.yaml in the nuageup-chart folder directly.
+   
+ - Replace the contents of the existing service.yaml file within nuageup-chart with the content of **service-ingress.yaml**.
+
+### Update Hosts File
+Update your hosts file to point a domain name to your Kubernetes cluster's IP address. Replace the contents of the existing update_hosts.sh file with the content of **ingress_update_hosts.sh**. 
+.
+### Uninstall and Redeploy
+- Uninstall the current Helm chart
+```shell
+helm uninstall nuageup
+```
+- Run the pipeline.
+   
+⚠️ **Important Note: This ingress configuration hasn't been tested yet. After redeploying, verify that the application becomes accessible through the domain name you configured in the hosts file (test.nuageup.com) and test its functionality.**
